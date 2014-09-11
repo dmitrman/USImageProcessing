@@ -24,4 +24,8 @@
     
      <bean id="NativeAPI" class="com.matlab.NativeAPI"> 
     </bean> 
+    
+     <bean id="lineDiafram" class="com.presentation.charts.LineChartSample"> 
+    </bean> 
+    
 </beans>
