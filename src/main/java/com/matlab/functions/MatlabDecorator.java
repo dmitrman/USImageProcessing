@@ -26,7 +26,7 @@ public class MatlabDecorator implements MatlabAPI{
 
 	@Override
 	public void writeXLS(String path, Object[] matrix, String sheet, String cell) throws MWException {
-		matlab.writeToXls(path,matrix,sheet,cell);		
+		//matlab.writeToXls(path,matrix,sheet,cell);		
 	}
 
 	@Override

@@ -1,4 +1,9 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,14 +21,20 @@ import com.matlab.functions.MatlabDecorator;
 
 public class MainClass extends Application {
 
-	public static void main(String[] args) throws MWException {
+	public static void main(String[] args) throws MWException, IOException {
 					
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ApplicationContext.xml");	
 		NativeAPI a=(NativeAPI) applicationContext.getBean("NativeAPI");
 	//	Application.launch(MainClass.class, (java.lang.String[])null);
 		Object[] input={1.0,33.0,4.0,5.0};
-		Object[] res=a.getIFFT2(1, input);
+		Object[] res=a.getFFT2(1, "C:\\1.png");
 		System.out.println(res[0]);
+		
+		BufferedImage input1=ImageIO.read(new File("C:\\1.png"));
+		BufferedImage dstImage=new BufferedImage(input1.getWidth(), input1.getHeight(), input1.getType());
+		MedianFilter m=new MedianFilter(3);
+		m.filter(input1, dstImage);
+		ImageIO.write(input1, "png", new File("C:\\out.png"));
 	}
 
 	@Override
@@ -39,7 +50,7 @@ public class MainClass extends Application {
 	/*
      * Automatically sets the path to java library
      */
-    private static void setJavaLibraryPath() throws NoSuchFieldException,
+  /*  private static void setJavaLibraryPath() throws NoSuchFieldException,
 	    SecurityException, IllegalArgumentException, IllegalAccessException {
 
 	String[] parts = System.getProperty("java.class.path").split(";");
@@ -70,5 +81,5 @@ public class MainClass extends Application {
 	}
 
 	System.loadLibrary("NNetwork"); /* (2) */
-    }
+    //}
 }
