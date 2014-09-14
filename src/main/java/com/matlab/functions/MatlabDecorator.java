@@ -26,7 +26,20 @@ public class MatlabDecorator implements MatlabAPI{
 
 	@Override
 	public void writeXLS(String path, Object[] matrix, String sheet, String cell) throws MWException {
-		matlab.writeToXls(path,matrix,sheet,cell);
+		matlab.writeToXls(path,matrix,sheet,cell);		
+	}
+
+	@Override
+	public Object[] classifyImage(String imagePath) {
+	/*	try {
+			Object[] res=null;
+			//res=matlab.processImage(1, imagePath);
+			return res;
+		} catch (MWException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		return null;
 		
 	}
 	

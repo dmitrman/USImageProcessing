@@ -1,12 +1,14 @@
 package com.matlab.functions;
 
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextLoader;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import com.mathworks.toolbox.javabuilder.MWException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -17,7 +19,7 @@ public class MatlabAPITest {
 	MatlabDecorator MatlabAPI;
 	Logger  logger = Logger.getLogger(this.getClass());
 	
-	@Test
+	@Ignore
 	public void testFFT() throws MWException {
 		String imagePath="C:\\Models\\sick\\2014-09-03_204814.png";
 		double samplFrequency=512.0;

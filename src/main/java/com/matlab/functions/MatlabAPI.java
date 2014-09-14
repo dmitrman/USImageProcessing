@@ -10,4 +10,6 @@ public interface MatlabAPI {
 	public Object[] getStatisticalFeatures(String imagePath);
 	
 	public void writeXLS(String path,Object[] matrix,String sheet,String cell) throws MWException ;
+
+	public Object[] classifyImage(String imagePath);
 }
