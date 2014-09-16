@@ -24,12 +24,12 @@ public class MainClass extends Application {
 	public static void main(String[] args) throws MWException, IOException {
 					
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ApplicationContext.xml");	
-		NativeAPI a=(NativeAPI) applicationContext.getBean("NativeAPI");
+		MatlabAPI a=(MatlabAPI) applicationContext.getBean("MatlabAPI");
 	//	Application.launch(MainClass.class, (java.lang.String[])null);
 		Object[] input={1.0,33.0,4.0,5.0};
 		Object[] res=null;
 		/* median filtration must be done before */
-		res=a.processImage(3, "C:\\2.bmp");		
+		res=a.getSpectralFeatures("C:\\2.bmp");		
 		System.out.println("\nVar="+res[0]);
 		System.out.println("Max="+res[1]);	
 		

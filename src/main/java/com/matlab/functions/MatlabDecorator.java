@@ -38,7 +38,8 @@ public class MatlabDecorator implements MatlabAPI {
 
 	@Override
 	public Object[] getSpectralFeatures(String imagePath) throws MWException {
-		return matlab.processImage(3, imagePath);
+		//return matlab.processImage(3, imagePath);
+		return matlab.processImageMatrix(3, matlab.getMedianFiltered(1, imagePath));
 	}
 
 	@Override

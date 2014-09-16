@@ -1,6 +1,4 @@
 function [V,M,Afafter]=processImageMatrix(A)
-A=rgb2gray(A);
-A=ordfilt2(A, 5, ones(3, 3)); % Медианная фильтрация
 %% Двумерное преобразование Фурье
 Af=fft2(A);
 initAf=Af;
