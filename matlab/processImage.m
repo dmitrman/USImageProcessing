@@ -1,8 +1,7 @@
-function [Afafter]=processImage(path)
+function [V,M,Afafter]=processImage(path)
 % Предварительная обработка
 A=imread(path);
 A=rgb2gray(A);
-A=medfilt2(A,[3 3]);
 %% Двумерное преобразование Фурье
 Af=fft2(A);
 initAf=Af;
@@ -26,4 +25,6 @@ FftS(1)=FftS(1)/2;% Нормировка постоянной составляющей в спектре
 F=0:Fd/FftL:Fd/2-1/FftL;% Массив частот вычисляемого спектра Фурье
 Afafter=FftS(1:240);% Построение спектра Фурье сигнала
 % на выход подаёются амплитуды до 30 Гц 
+V=var(FftS(2:240));
+M=FftS(1);
 end
