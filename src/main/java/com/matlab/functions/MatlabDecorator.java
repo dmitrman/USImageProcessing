@@ -1,5 +1,11 @@
 package com.matlab.functions;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mathworks.toolbox.javabuilder.MWException;
@@ -9,13 +15,13 @@ import com.matlab.NativeAPI;
  * http://www.javapractices.com/references/ReferencesAction.do;jsessionid=3874BFDEE6542D4B11574E03FBD344D7
  */
 
-public class MatlabDecorator implements MatlabAPI{
+public class MatlabDecorator implements MatlabAPI {
 	@Autowired
 	NativeAPI matlab;
-	
+
 	public Object[] getFFT(String imagePath, double samplFrequency,
-			double numberSpectrLines) throws MWException {		
-		return matlab.getFFT(2, imagePath, samplFrequency,numberSpectrLines);		
+			double numberSpectrLines) throws MWException {
+		return matlab.getFFT(2, imagePath, samplFrequency, numberSpectrLines);
 	}
 
 	@Override
@@ -25,22 +31,47 @@ public class MatlabDecorator implements MatlabAPI{
 	}
 
 	@Override
-	public void writeXLS(String path, Object[] matrix, String sheet, String cell) throws MWException {
-		//matlab.writeToXls(path,matrix,sheet,cell);		
+	public void writeXLS(String path, Object[] matrix, String sheet, String cell)
+			throws MWException {
+		matlab.writeToXls(path, matrix, sheet, cell);
 	}
 
 	@Override
-	public Object[] classifyImage(String imagePath) {
-	/*	try {
-			Object[] res=null;
-			//res=matlab.processImage(1, imagePath);
-			return res;
-		} catch (MWException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		return null;
-		
+	public Object[] getSpectralFeatures(String imagePath) throws MWException {
+		return matlab.processImage(3, imagePath);
 	}
-	
+
+	@Override
+	public void getSpectralFeaturesFromImages(String[] images)
+			throws MWException {
+		final String xlsx_path = "C:\\out.xlsx";
+		int start = 2;
+		for (int i = 0; i < images.length; i++) {
+			Object[] res = getSpectralFeatures(images[i]);
+			writeXLS(xlsx_path, new Object[] { res[0], res[1] }, "spectral",
+					"A" + String.valueOf(start + i + 3));
+		}
+
+	}
+
+	@Override
+	public void getSpectralFeaturesWindow(String imagePath, int window_size)
+			throws MWException, IOException {
+	/*	BufferedImage img = ImageIO.read(new File(imagePath));
+		int iw = img.getWidth();
+		int ih = img.getHeight();
+		
+		for (int i = 0; i < ih; i++) {
+			for (int j = 0; j < iw; j++) {
+				int c = img.getRGB(j, i);
+
+				int a = (int) (((c & 16711680) >> 16) * 0.3
+						+ ((c & 65280) >> 8) * 0.59 + ((c & 255)) * 0.11);
+				img1.setRGB(j, i, GetColorFromRGB(a, a, a));
+
+			}
+		}
+*/
+	}
+
 }

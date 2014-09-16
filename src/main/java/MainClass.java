@@ -31,14 +31,10 @@ public class MainClass extends Application {
 		/* median filtration must be done before */
 		res=a.processImage(3, "C:\\2.bmp");		
 		System.out.println("\nVar="+res[0]);
-		System.out.println("Max="+res[2]);
+		System.out.println("Max="+res[1]);	
 		
 		
-	/*	BufferedImage input1=ImageIO.read(new File("C:\\1.png"));
-		BufferedImage dstImage=new BufferedImage(input1.getWidth(), input1.getHeight(), input1.getType());
-		MedianFilter m=new MedianFilter(3);
-		m.filter(input1, dstImage);
-		ImageIO.write(input1, "png", new File("C:\\out.png"));*/
+	
 	}
 
 	@Override
