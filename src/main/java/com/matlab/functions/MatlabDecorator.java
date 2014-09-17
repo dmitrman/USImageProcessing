@@ -58,14 +58,14 @@ public class MatlabDecorator implements MatlabAPI {
 	@Override
 	public void getSpectralFeaturesWindow(String imagePath, int window_size)
 			throws MWException, IOException {
-	/*	BufferedImage img = ImageIO.read(new File(imagePath));
-		int iw = img.getWidth();
-		int ih = img.getHeight();
+		double[][] img=(double[][]) matlab.getMedianFiltered(1, imagePath);
+		int iw = img.length;
+		int ih = img[0].length;
 		
-		for (int i = 0; i < ih; i++) {
-			for (int j = 0; j < iw; j++) {
-				int c = img.getRGB(j, i);
-
+		for (int i = 0; i < ih; i+=window_size) {
+			for (int j = 0; j < iw; j+=window_size) {
+				double pixel=img[i][j];
+				getWindowImage(img,i,j,window_size);
 				int a = (int) (((c & 16711680) >> 16) * 0.3
 						+ ((c & 65280) >> 8) * 0.59 + ((c & 255)) * 0.11);
 				img1.setRGB(j, i, GetColorFromRGB(a, a, a));
@@ -73,6 +73,15 @@ public class MatlabDecorator implements MatlabAPI {
 			}
 		}
 */
+	}
+
+	private void getWindowImage(double[][] img, int i_start, int j_start,int window_size) {
+		for (int i=0;i<i+window_size;i++){
+			for (int j=0;j<j+window_size;j++) {
+				
+			}
+		}
+		
 	}
 
 }
