@@ -15,7 +15,5 @@ public interface MatlabAPI {
 
 	public Object[] getSpectralFeatures(String imagePath) throws MWException;
 	
-	public void getSpectralFeaturesFromImages(String[] images) throws MWException;
-	
 	public void getSpectralFeaturesWindow(String imagePath,int window_size) throws MWException,IOException;
 }

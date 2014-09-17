@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mathworks.toolbox.javabuilder.MWException;
+import com.mathworks.toolbox.javabuilder.*;
 import com.matlab.NativeAPI;
 
 /*
@@ -38,50 +38,72 @@ public class MatlabDecorator implements MatlabAPI {
 
 	@Override
 	public Object[] getSpectralFeatures(String imagePath) throws MWException {
-		//return matlab.processImage(3, imagePath);
-		return matlab.processImageMatrix(3, matlab.getMedianFiltered(1, imagePath));
-	}
-
-	@Override
-	public void getSpectralFeaturesFromImages(String[] images)
-			throws MWException {
-		final String xlsx_path = "C:\\out.xlsx";
-		int start = 2;
-		for (int i = 0; i < images.length; i++) {
-			Object[] res = getSpectralFeatures(images[i]);
-			writeXLS(xlsx_path, new Object[] { res[0], res[1] }, "spectral",
-					"A" + String.valueOf(start + i + 3));
-		}
-
+		// return matlab.processImage(3, imagePath);
+		return matlab.processImageMatrix(3,
+				matlab.getMedianFiltered(1, imagePath));
 	}
 
 	@Override
 	public void getSpectralFeaturesWindow(String imagePath, int window_size)
 			throws MWException, IOException {
-		double[][] img=(double[][]) matlab.getMedianFiltered(1, imagePath);
+		MWNumericArray filt = (MWNumericArray) (matlab.getMedianFiltered(1,
+				imagePath)[0]);
+		double[][] img = toTwoDimensionalArray(filt);
+		//printArray(img);
+		//System.out.println(filt);
+	//	System.out.println("---------------------------");
+		//printArray(getWindowImage(img, 0, window_size, window_size));
+		window_size=128;
 		int iw = img.length;
 		int ih = img[0].length;
-		
-		for (int i = 0; i < ih; i+=window_size) {
-			for (int j = 0; j < iw; j+=window_size) {
-				double pixel=img[i][j];
-				getWindowImage(img,i,j,window_size);
-				int a = (int) (((c & 16711680) >> 16) * 0.3
-						+ ((c & 65280) >> 8) * 0.59 + ((c & 255)) * 0.11);
-				img1.setRGB(j, i, GetColorFromRGB(a, a, a));
+		for (int i = 0; i <= ih - window_size; i += window_size) {
+			for (int j = 0; j <= iw - window_size; j += window_size) {
+				Object[] res = matlab.processImageMatrix(3,
+						getWindowImage(img, i, j, window_size));
+				System.out.println("-- " + res[0] + "  " + res[1]);
 
 			}
 		}
-*/
+
 	}
 
-	private void getWindowImage(double[][] img, int i_start, int j_start,int window_size) {
-		for (int i=0;i<i+window_size;i++){
-			for (int j=0;j<j+window_size;j++) {
-				
+	private double[][] getWindowImage(double[][] img, int i_start, int j_start,
+			int window_size) {
+		double[][] w = new double[window_size][window_size];
+		/* формирование массива изображения в окне */
+		for (int i = i_start; i < i_start + window_size; i++) {
+			for (int j = j_start; j < j_start + window_size; j++) {
+				//System.out.println(" " + i);
+			//	System.out.println(" " + j);
+				w[i - i_start][j - j_start] = img[i][j];
 			}
 		}
-		
+		return w;
 	}
 
+	private double[][] toTwoDimensionalArray(MWNumericArray mas) {		
+		int x = 0;
+		int y = 0;		
+		int[] d=mas.getDimensions();
+		double[][] res = new double[d[0]][d[1]];
+		int s=0;
+		for (int i = 0; i < d[0]*d[1]; i++)
+		{			
+			res[y][x]=mas.getDouble(i+1);
+			y++;
+			s++;
+			if(y==d[1]) {y=0;x++;}			
+		}
+	
+		return res;
+	}
+
+	private void printArray(double[][] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[0].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
 }

@@ -1,4 +1,5 @@
 function [V,M,Afafter]=processImageMatrix(A)
+%B = reshape(A,m,n)
 %% Двумерное преобразование Фурье
 Af=fft2(A);
 initAf=Af;

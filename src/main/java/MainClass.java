@@ -29,9 +29,9 @@ public class MainClass extends Application {
 		Object[] input={1.0,33.0,4.0,5.0};
 		Object[] res=null;
 		/* median filtration must be done before */
-		res=a.getSpectralFeatures("C:\\2.bmp");		
-		System.out.println("\nVar="+res[0]);
-		System.out.println("Max="+res[1]);	
+		a.getSpectralFeaturesWindow("C:\\2.bmp",5);		
+		//System.out.println("\nVar="+res[0]);
+		//System.out.println("Max="+res[1]);	
 		
 		
 	
