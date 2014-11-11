@@ -1,19 +1,15 @@
 package com.matlab.functions;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import com.mathworks.toolbox.javabuilder.MWException;
 
-public interface MatlabAPI {
-
-	public Object[] getFFT(String imagePath, double samplFrequency,
-			double numberSpectrLines) throws MWException;
-
-	public Object[] getStatisticalFeatures(String imagePath);
-	
-	public void writeXLS(String path,Object[] matrix,String sheet,String cell) throws MWException ;
-
-	public Object[] getSpectralFeatures(String imagePath) throws MWException;
-	
-	public void getSpectralFeaturesWindow(String imagePath,int window_size) throws MWException,IOException;
+public interface MatlabAPI {	
+	/* Returns 4 statistic featues: mean, variance, skewness, kurtosis */
+	Object[] getStatisticalFeatures(String image_path, int window);	
+	/* Read an image from file */
+	Object[] readImage(String image_path);
+	/* Applies homomorphic filtering */
+	Object[] getHomomorphicFilter(String image_path, double sigma);
 }
