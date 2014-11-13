@@ -1,6 +1,8 @@
 package com.presentation;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -28,11 +30,12 @@ public class MainScene extends Application {
 		Object[] res=null;
 		//res=a.getStatisticalFeatures("C:\\11.png", 20);
 		//res=a.readImage("C:\\11.png");
-		res=a.getHomomorphicFilter("C:\\11.png",3.0);
+		res=a.getHomomorphicFilter("C:\\11.png",3d);
 		System.out.println(res[0]);
 		
 	}
 
+	// setenv('JAVA_HOME','C:\Program Files\Java\jdk1.6.0_32');
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -48,5 +51,12 @@ public class MainScene extends Application {
 					ex);
 		}
 	}
+	
+	public static Image getImageFromArray(int[] pixels, int width, int height) {
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        WritableRaster raster = (WritableRaster) image.getData();
+        raster.setPixels(0,0,width,height,pixels);
+        return image;
+    }
 
 }

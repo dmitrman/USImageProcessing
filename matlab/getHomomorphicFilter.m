@@ -1,5 +1,6 @@
 function [Ihmf]=getHomomorphicFilter(image, sigma)
 %% Статистические признаки в окне
+image=rgb2gray(image);
 I = im2double(image);
 I = log(1 + I);
 M = 2*size(I,1) + 1;
