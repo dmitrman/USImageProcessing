@@ -42,7 +42,7 @@
           <items>
             <MenuItem mnemonicParsing="false" onAction="#openCarImage" text="Open car image" fx:id="menuItemOpenCarImage" />
             <MenuItem mnemonicParsing="false" onAction="#openEmblemImage" text="Open emblem image" fx:id="menuItemOpenEmblemImage" />
-            <MenuItem mnemonicParsing="false" onAction="#run" text="Run" fx:id="menuItemRun" />
+            <MenuItem mnemonicParsing="false" onAction="#displayMainView" text="Run" fx:id="menuItemRun" />
             <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" fx:id="menuItemExit" />
           </items>
         </Menu>

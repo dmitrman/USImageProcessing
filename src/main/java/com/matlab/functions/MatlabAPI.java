@@ -12,4 +12,7 @@ public interface MatlabAPI {
 	Object[] readImage(String image_path);
 	/* Applies homomorphic filtering */
 	Object[] getHomomorphicFilter(String image_path, double sigma);
+	/* Cluster feature vector */
+	Object[] getFCMClustrering(Object features, int num_clusters);
+	Object[] getHomomorphicFilter(int[][] image,double sigma);
 }

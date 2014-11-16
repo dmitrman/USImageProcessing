@@ -51,5 +51,21 @@ public class MatlabDecorator implements MatlabAPI {
 		}
 		return null;
 	}
+
+	public Object[] getHomomorphicFilter(int[][] image,double sigma) {
+		try {
+			return matlab.getHomomorphicFilterFromArray(1, image,sigma);
+		} catch (MWException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public Object[] getFCMClustrering(Object features, int num_clusters) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

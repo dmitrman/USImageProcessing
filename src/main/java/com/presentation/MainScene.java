@@ -25,17 +25,27 @@ import javafx.stage.Stage;
 public class MainScene extends Application {
 
 	public static void main(String[] args) {
-		// Application.launch(MainScene.class, (java.lang.String[]) null);
+		Application.launch(MainScene.class, (java.lang.String[]) null);
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 				"ApplicationContext.xml");
 		MatlabAPI a = (MatlabAPI) applicationContext.getBean("MatlabAPI");
 		Object[] res = null;
 		// res=a.getStatisticalFeatures("C:\\11.png", 20);
 		// res=a.readImage("C:\\11.png");
-		res = a.getHomomorphicFilter("C:\\11.png", 10d);
-		MWNumericArray filt = (MWNumericArray) (res[0]);
-		// System.out.println(res[0]);
-		getImageFromMWNumericArray(filt);
+		//*
+		//res = a.getHomomorphicFilter("C:\\11.png", 10);
+		//MWNumericArray filt = (MWNumericArray) (res[0]);
+		//getImageFromMWNumericArray(filt);
+		//*
+		BufferedImage im;
+		try {
+			im = ImageIO.read(new File("C:\\11.png"));
+			res = a.getHomomorphicFilter(toHalfToningImage(im), 10);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	// setenv('JAVA_HOME','C:\Program Files\Java\jdk1.6.0_32');
@@ -54,7 +64,7 @@ public class MainScene extends Application {
 					ex);
 		}
 	}
-	
+
 	public static Image getImageFromMWNumericArray(MWNumericArray array) {
 		int[] dim = array.getDimensions();
 
@@ -64,11 +74,11 @@ public class MainScene extends Application {
 			int g = array.getInt(i + 1);
 			res[i] = GetColorFromRGB(g, g, g);
 		}
-
-		writeImageToFile(getImageFromArray(res, dim[0], dim[1]), "png", "C:\\out.png");;
-		System.out.println(res[0] + " " + res[1] + " " + res[2]);
-		System.out.println(dim[0] * dim[1]);
-		return null;
+		// writeImageToFile(getImageFromArray(res, dim[0], dim[1]), "png",
+		// "C:\\out.png");;
+		// System.out.println(res[0] + " " + res[1] + " " + res[2]);
+		// System.out.println(dim[0] * dim[1]);
+		return getImageFromArray(res, dim[0], dim[1]);
 	}
 
 	private static int GetColorFromRGB(int r, int g, int b) {
@@ -83,7 +93,7 @@ public class MainScene extends Application {
 		for (int i = 0; i < ih; i++) {
 			for (int j = 0; j < iw; j++) {
 				int g = mas[s];
-				image.setRGB(i,j, GetColorFromRGB(g, g, g));
+				image.setRGB(i, j, GetColorFromRGB(g, g, g));
 				s++;
 
 			}
@@ -100,4 +110,20 @@ public class MainScene extends Application {
 
 		}
 	}
+
+	public static int[][] toHalfToningImage(BufferedImage img) {
+		int iw = img.getWidth();
+		int ih = img.getHeight();
+		int[][] image = new int[ih][iw];
+		for (int i = 0; i < ih; i++) {
+			for (int j = 0; j < iw; j++) {
+				int c = img.getRGB(j, i);
+				int a = (int) (((c & 16711680) >> 16) * 0.3
+						+ ((c & 65280) >> 8) * 0.59 + ((c & 255)) * 0.11);
+				image[i][j] = a;
+			}
+		}
+		return image;
+	}
+
 }
