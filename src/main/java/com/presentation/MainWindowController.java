@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 
@@ -14,8 +15,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.domain.MatlabAPI;
 import com.mathworks.toolbox.javabuilder.MWNumericArray;
-import com.matlab.functions.MatlabAPI;
+import com.service.ImageManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,10 +34,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
@@ -45,6 +50,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
@@ -86,6 +93,8 @@ public class MainWindowController implements Initializable {
     private RadioMenuItem radioKNN;
     @FXML
     private PieChart chart;
+    @FXML
+    private ListView<String> log_list;
     
 	static MatlabAPI mAPI;
 	private String imagePath = "C:\\";
@@ -114,6 +123,7 @@ public class MainWindowController implements Initializable {
         assert radioFCM != null : "fx:id=\"radioFCM\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert radioPNN != null : "fx:id=\"radioPNN\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert chart != null : "fx:id=\"chart\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert log_list != null : "fx:id=\"log_list\" was not injected: check your FXML file 'MainWindow.fxml'.";
         root.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			final KeyCombination undo = new KeyCodeCombination(KeyCode.Z,
 					KeyCombination.CONTROL_DOWN);
@@ -142,7 +152,11 @@ public class MainWindowController implements Initializable {
 				}
 			}
 
-		});        
+		});      
+        
+        ObservableList<String> items =FXCollections.observableArrayList (
+        	    "Single", "Double", "Suite", "Family App");
+        log_list.setItems(items);
 
 	}
 
@@ -204,8 +218,22 @@ public class MainWindowController implements Initializable {
                 });
             data.getNode().setStyle(
             	      "-fx-pie-color: " + pieColors[i % pieColors.length] + ";"
-            	    );
+            	    );          
             	    i++;
+        }
+        Set<Node> items = chart.lookupAll("Label.chart-legend-item");
+   i = 0;
+        // these colors came from caspian.css .default-color0..4.chart-pie
+        Color[] colors = { Color.RED, Color.ORANGE, Color.web("#04B404")};
+        for (Node item : items) {
+          Label label = (Label) item;
+          //final Rectangle rectangle = new Rectangle(10, 10, colors[i]);
+          Circle rectangle = new Circle(10, colors[i]);
+          //final Glow niceEffect = new Glow();
+      //    niceEffect.setInput(new Reflection());
+        //  rectangle.setEffect(niceEffect);
+          label.setGraphic(rectangle);
+          i++;
         }
         
         ((AnchorPane) root).getChildren().add( caption);
@@ -281,11 +309,7 @@ public class MainWindowController implements Initializable {
 			bufferedImages.put(new Integer(bufferedImages.size() + 1),
 					mainViewImage);
 			number_history=bufferedImages.size();
-		}
+		}	
 		
-		
-		
-	}
-
-	
+	}	
 }

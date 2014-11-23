@@ -1,4 +1,4 @@
-package com.presentation;
+package com.service;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -70,4 +70,20 @@ public class ImageManager {
 
 		}
 	}	
+	
+	public static int[][] toHalfToningImage(BufferedImage img) {
+		int iw = img.getWidth();
+		int ih = img.getHeight();
+		int[][] image = new int[ih][iw];
+		for (int i = 0; i < ih; i++) {
+			for (int j = 0; j < iw; j++) {
+				int c = img.getRGB(j, i);
+				int a = (int) (((c & 16711680) >> 16) * 0.3
+						+ ((c & 65280) >> 8) * 0.59 + ((c & 255)) * 0.11);
+				image[i][j] = a;
+			}
+		}
+		return image;
+	}
+
 }

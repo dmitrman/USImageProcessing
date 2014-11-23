@@ -1,4 +1,4 @@
-package com.matlab.functions;
+package com.domain;
 
 public interface MatlabAPI {	
 	/* Returns 4 statistic featues: mean, variance, skewness, kurtosis */

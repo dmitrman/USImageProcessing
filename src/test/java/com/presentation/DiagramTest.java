@@ -9,9 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextLoader;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.domain.MatlabDecorator;
 import com.mathworks.toolbox.javabuilder.MWException;
 import com.mathworks.toolbox.javabuilder.MWNumericArray;
-import com.matlab.functions.MatlabDecorator;
 import com.presentation.charts.LineChartSample;
 
 @RunWith(SpringJUnit4ClassRunner.class)

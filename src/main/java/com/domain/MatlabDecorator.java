@@ -1,4 +1,4 @@
-package com.matlab.functions;
+package com.domain;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

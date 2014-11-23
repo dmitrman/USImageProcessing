@@ -19,7 +19,7 @@
    <!-- Activates scanning of @Autowired -->
    <context:annotation-config/> 
     
-    <bean id="MatlabAPI" class="com.matlab.functions.MatlabDecorator"> 
+    <bean id="MatlabAPI" class="com.domain.MatlabDecorator"> 
     </bean> 
     
      <bean id="NativeAPI" class="com.matlab.NativeAPI"> 

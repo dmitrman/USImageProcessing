@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextLoader;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.domain.MatlabDecorator;
 import com.mathworks.toolbox.javabuilder.MWException;
 
 @RunWith(SpringJUnit4ClassRunner.class)

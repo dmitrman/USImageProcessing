@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -12,14 +13,23 @@
   <children>
     <TitledPane animated="false" prefHeight="420.0" prefWidth="507.0" text="Processing image" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <content>
-            <SplitPane prefHeight="160.0" prefWidth="200.0">
+            <SplitPane dividerPositions="0.5" prefHeight="397.0" prefWidth="732.0">
               <items>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <ImageView fx:id="mainView" fitHeight="387.0" fitWidth="433.0" pickOnBounds="true" preserveRatio="false" />
+                  <VBox prefHeight="396.0" prefWidth="288.0" SplitPane.resizableWithParent="false">
                      <children>
-                  <ImageView fx:id="mainView" fitHeight="390.0" fitWidth="426.0" layoutX="6.0" layoutY="8.0" pickOnBounds="true" preserveRatio="false" />
-                        <PieChart fx:id="chart" layoutX="427.0" prefHeight="289.0" prefWidth="303.0" />
+                        <TitledPane animated="false" prefHeight="297.0" prefWidth="305.0" text="Chart">
+                           <content>
+                              <PieChart fx:id="chart" prefHeight="175.0" prefWidth="297.0" />
+                           </content>
+                        </TitledPane>
+                        <TitledPane animated="false" maxHeight="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Output" textAlignment="JUSTIFY">
+                           <content>
+                              <ListView fx:id="log_list" prefHeight="129.0" prefWidth="303.0" />
+                           </content>
+                        </TitledPane>
                      </children>
-                  </AnchorPane>
+                  </VBox>
               </items>
             </SplitPane>
          </content>
