@@ -29,7 +29,28 @@ public class MatlabDecorator implements MatlabAPI {
 		}
 		return null;
 	}
+	
+	@Override
+	public Object[] getStatisticalFeatures(Object[] image, int window) {
+		try {
+			return matlab.getStatisticFeatures(1,image[0],window);
+		} catch (MWException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	@Override
+	public Object[] getDFTFeatures(Object[] image, int window) {
+		try {
+			return matlab.getDFTFeatures(1,image[0],window);
+		} catch (MWException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@Override
 	public Object[] readImage(String image_path) {
 		try {
@@ -52,9 +73,9 @@ public class MatlabDecorator implements MatlabAPI {
 		return null;
 	}
 
-	public Object[] getHomomorphicFilter(int[][] image,double sigma) {
+	public Object[] getHomomorphicFilter(Object[] image,double sigma) {
 		try {
-			return matlab.getHomomorphicFilterFromArray(1, image,sigma);
+			return matlab.getHomomorphicFilter(1, image[0],sigma);
 		} catch (MWException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,9 +84,15 @@ public class MatlabDecorator implements MatlabAPI {
 	}
 	
 	@Override
-	public Object[] getFCMClustrering(Object features, int num_clusters) {
-		// TODO Auto-generated method stub
+	public Object[] getFCMClustrering(Object[] features, int mask,int w,int h) {
+		try {
+			return matlab.getFCMClustrering(4,features[0],mask,w,h);
+		} catch (MWException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
+	
 	
 }

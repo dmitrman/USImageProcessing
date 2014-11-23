@@ -1,7 +1,6 @@
 function [R]=getStatisticFeatures(image, mask)
 %% Статистические признаки в окне
 A=image;
-A=rgb2gray(A);
 s=size(A);
 w=s(2);
 h=s(1);
@@ -16,7 +15,7 @@ for i=1:mask:h-mask
 		cko=sqrt(m2);
 		ske=moment(a,3)/(cko^3);
 		kur=moment(a,4)/(cko^4);	
-		X=[X;m1 cko ske kur];			
+		X=[X;m2 cko];			
 	end
 end
 R=X;
