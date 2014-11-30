@@ -55,7 +55,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
-public class MainWindowController implements Initializable {
+public class ClusterController implements Initializable {
 
 	@FXML
 	Parent root;
@@ -312,7 +312,6 @@ public class MainWindowController implements Initializable {
 	private void printLogMessage(String msg) {
 		 ObservableList<String> items =FXCollections.observableArrayList (
 	        	    "Single", "Double", "Suite", "Family App");
-	        log_list.setItems(items);
-	        log_list.
+	        
 	}
 }

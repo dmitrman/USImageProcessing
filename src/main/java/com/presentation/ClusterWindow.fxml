@@ -8,30 +8,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root" minWidth="732.0" prefHeight="445.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.presentation.MainWindowController">
+<AnchorPane fx:id="root" minWidth="607.0" prefHeight="418.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.presentation.ClusterController">
   <!-- TODO Add Nodes -->
   <children>
     <TitledPane animated="false" prefHeight="420.0" prefWidth="507.0" text="Processing image" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <content>
-            <SplitPane dividerPositions="0.5" prefHeight="397.0" prefWidth="732.0">
-              <items>
-            <ImageView fx:id="mainView" fitHeight="387.0" fitWidth="433.0" pickOnBounds="true" preserveRatio="false" />
-                  <VBox prefHeight="396.0" prefWidth="288.0" SplitPane.resizableWithParent="false">
-                     <children>
-                        <TitledPane animated="false" prefHeight="297.0" prefWidth="305.0" text="Chart">
-                           <content>
-                              <PieChart fx:id="chart" prefHeight="175.0" prefWidth="297.0" />
-                           </content>
-                        </TitledPane>
-                        <TitledPane animated="false" maxHeight="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Output" textAlignment="JUSTIFY">
-                           <content>
-                              <ListView fx:id="log_list" prefHeight="129.0" prefWidth="303.0" />
-                           </content>
-                        </TitledPane>
-                     </children>
-                  </VBox>
-              </items>
-            </SplitPane>
+            <AnchorPane prefHeight="403.0" prefWidth="625.0">
+               <children>
+                  <SplitPane dividerPositions="0.5" layoutX="9.0" layoutY="30.0" prefHeight="363.0" prefWidth="598.0">
+                    <items>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                        <ImageView fx:id="mainView" fitHeight="369.0" fitWidth="422.0" pickOnBounds="true" preserveRatio="false" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="376.0" prefWidth="159.0">
+                           <children>
+                              <Button layoutX="36.0" layoutY="33.0" mnemonicParsing="false" text="Button" />
+                              <Button layoutX="36.0" layoutY="83.0" mnemonicParsing="false" text="Button" />
+                              <Button layoutX="36.0" layoutY="133.0" mnemonicParsing="false" text="Button" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
          </content>
     </TitledPane>
     <MenuBar prefHeight="25.0" prefWidth="732.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
